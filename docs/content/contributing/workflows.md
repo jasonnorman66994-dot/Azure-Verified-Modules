@@ -55,8 +55,12 @@ This page documents the GitHub Actions workflows used in the Azure Verified Modu
 
 **Key Features:**
 - Simple static content deployment
-- Uploads entire repository as artifact
+- Uploads repository root as artifact (alternative deployment method)
 - Single deployment job
+
+{{% notice style="note" %}}
+This workflow appears to be an alternative to the Hugo deployment. The primary documentation deployment uses the Hugo site build workflow.
+{{% /notice %}}
 
 ### Code Quality & Review
 
@@ -277,7 +281,9 @@ Several workflows automatically create pull requests:
 | API Specs update | `0 10 * * 1` | Weekly Monday at 10 AM |
 | AzAdvertizer diff | `0 3 * * 0` | Weekly Sunday at 3 AM |
 | Team existence check | `0 15 * * 1-5` | Weekdays at 3 PM |
-| Terraform governance | `43 0 * * 0` | Weekly Sunday at 12:43 AM |
+| Terraform governance | `43 0 * * 0` | Weekly Sunday at 12:43 AM* |
+
+*Note: The offset minute value (43) helps distribute workflow load and avoid resource contention with other scheduled workflows.
 
 ## Troubleshooting
 
